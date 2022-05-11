@@ -22,7 +22,7 @@ namespace StirlingEngine.Framework.Input
         //  Properties  -------------------------------------------------------------------------------------------------------
         private Dictionary<Keys, string> inputKeyMap;       //  Stores what keys are tied to which inputs
         private Dictionary<string, KeyState> inputState;    //  Stores which inputs are pressed/released
-        private Dictionary<string, ushort> inputDuration;   //  Stores how long the 
+        private Dictionary<string, ushort> inputDuration;   //  Stores how long the button has been pressed/released
 
         //  Singleton Pattern (Thread Safe) -----------------------------------------------------------------------------------
         private static readonly object padlock = new object();
@@ -52,8 +52,9 @@ namespace StirlingEngine.Framework.Input
         public void Update()
         {
             Dictionary<string, KeyState> oldInputState = new Dictionary<string, KeyState>(inputState);
+            List<string> inputStateKeys = new List<string>(inputState.Keys);
 
-            foreach (string input in inputState.Keys)
+            foreach (string input in inputStateKeys)
             {
                 inputState[input] = KeyState.Up;
                 foreach (Keys key in inputKeyMap.Keys)
@@ -62,7 +63,7 @@ namespace StirlingEngine.Framework.Input
                 }
             }
 
-            foreach(string input in inputState.Keys)
+            foreach(string input in inputStateKeys)
             {
                 if (inputState[input] != oldInputState[input])
                 {
@@ -78,8 +79,8 @@ namespace StirlingEngine.Framework.Input
         public void registerKeyInput(string input, Keys key)
         {
             inputKeyMap.Add(key, input);
-            if (!inputState.ContainsKey(input))     inputState.Add(     input,  KeyState.Up);
-            if (!inputDuration.ContainsKey(input))  inputDuration.Add(  input,  0);
+            if (!inputState.ContainsKey(input)) inputState.Add(input, KeyState.Up);
+            if (!inputDuration.ContainsKey(input)) inputDuration.Add(input, 0);
         }
 
         public void resetKeyMap()

@@ -85,8 +85,8 @@ namespace StirlingEngine.Framework.Graphics
         {
             Matrix transformMatrix = Matrix.CreateScale(1);
             transformMatrix *= Matrix.CreateTranslation(new Vector3(
-                    position.X + graphicsDevice.Viewport.Width,
-                    position.Y + graphicsDevice.Viewport.Height,
+                    (position.X + graphicsDevice.Viewport.Width) / 2,
+                    (position.Y + graphicsDevice.Viewport.Height) / 2,
                     0
                 ));
 

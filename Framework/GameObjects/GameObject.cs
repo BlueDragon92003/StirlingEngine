@@ -26,9 +26,9 @@ namespace StirlingEngine.Framework.GameObjects
             get { return drawRectangle.Center; }
             set
             {
-                collider.MoveTo(Position);
-                drawRectangle.X = Position.X - drawRectangle.Width / 2;
-                drawRectangle.Y = Position.Y - drawRectangle.Height / 2;
+                collider.MoveTo(value);
+                drawRectangle.X = value.X - drawRectangle.Width / 2;
+                drawRectangle.Y = value.Y - drawRectangle.Height / 2;
             }
         }
 

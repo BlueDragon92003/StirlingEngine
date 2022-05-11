@@ -12,7 +12,7 @@ namespace StirlingEngine.Demo.GameObjects
         public BasicSquareItem(Point position, int size, Texture2D texture)
             : base(position,
             new RectangleCollider(position, new Point(size,size)),
-            new Rectangle(position, new Point(size, size)))
+            new Rectangle(new Point(position.X - (size / 2), position.Y - (size / 2)), new Point(size, size)))
         {
             this.texture = texture;
         }

@@ -10,7 +10,7 @@ namespace StirlingEngine.Framework.Colliders
         //  Constructors    ---------------------------------------------------------------------------------------------------
         public RectangleCollider(Point posistion, Point size)
         {
-            collisionRectangle = new Rectangle(posistion, size);
+            collisionRectangle = new Rectangle(posistion - (size / new Point(2,2)), size);
         }
 
         //  Methods     -------------------------------------------------------------------------------------------------------
