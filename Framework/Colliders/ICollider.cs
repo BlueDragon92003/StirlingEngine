@@ -15,14 +15,14 @@ using Microsoft.Xna.Framework;
 
 namespace StirlingEngine.Framework.Colliders
 {
-    public interface Collider
+    public interface ICollider
     {
         /*      Name: CollidesWith
          *   Purpose: Checks if this collider collides with the given collider
          *   Precons: A valid Collider to check collision.
          *  Postcons: Returns if the colliders collide.
          */
-        public bool CollidesWith(Collider collider);
+        public bool CollidesWith(ICollider collider);
 
         /*      Name: MoveTo
          *   Purpose: Moves the collider to the specified point

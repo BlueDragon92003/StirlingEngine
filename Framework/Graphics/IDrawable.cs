@@ -7,17 +7,18 @@
  *  
  */
 
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace StirlingEngine.Framework.Graphics
 {
-    public interface Drawable
+    public interface IDrawable
     {
         /*      Name: Draw
          *   Purpose: Draws the drawable object to the screen using the provided spritebatch
          *   Precons: A valid Sprite Batch to draw to
          *  Postcons: The object has been drawn to the screen.
          */
-        public void Draw(SpriteBatch _spriteBatch);
+        public void Draw(SpriteBatch _spriteBatch, GameTime gameTime);
     }
 }

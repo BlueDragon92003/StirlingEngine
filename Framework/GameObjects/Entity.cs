@@ -15,7 +15,7 @@ namespace StirlingEngine.Framework.GameObjects
     public abstract class Entity : GameObject
     {
         //  Constructors    ---------------------------------------------------------------------------------------------------
-        protected Entity(Point position, Collider collider, Rectangle drawRectangle) : base(position, collider, drawRectangle) { }
+        protected Entity(Point position, ICollider collider, Rectangle drawRectangle) : base(position, collider, drawRectangle) { }
 
         //  Methods     -------------------------------------------------------------------------------------------------------
         /*      Name: Move

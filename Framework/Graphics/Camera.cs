@@ -29,7 +29,7 @@ namespace StirlingEngine.Framework.Graphics
     {
         //  Properties  -------------------------------------------------------------------------------------------------------
         private Point position;
-        private readonly List<Drawable> items;
+        private readonly List<IDrawable> items;
         private readonly SpriteBatch spriteBatch;
         private readonly GraphicsDevice graphicsDevice;
 
@@ -48,7 +48,7 @@ namespace StirlingEngine.Framework.Graphics
                         Effect effect = null)
         {
             this.position = position;
-            items = new List<Drawable>();
+            items = new List<IDrawable>();
             this.graphicsDevice = graphicsDevice;
             spriteBatch = new SpriteBatch(graphicsDevice);
 
@@ -66,7 +66,7 @@ namespace StirlingEngine.Framework.Graphics
          *   Precons: A valid Drawable to add to the list
          *  Postcons: Drawable added to the list.
          */
-        public void AddItem(Drawable item)
+        public void AddItem(IDrawable item)
         {
             items.Add(item);
         }
@@ -81,7 +81,7 @@ namespace StirlingEngine.Framework.Graphics
          *   Precons: None
          *  Postcons: All items in drawable list have been drawn and the list has been cleared.
          */
-        public void Draw()
+        public void Draw(GameTime gameTime)
         {
             Matrix transformMatrix = Matrix.CreateScale(1);
             transformMatrix *= Matrix.CreateTranslation(new Vector3(
@@ -101,15 +101,20 @@ namespace StirlingEngine.Framework.Graphics
                 graphicsDevice.Clear((Color) bgColor);
             }
 
-            foreach (Drawable item in items)
+            foreach (IDrawable item in items)
             {
-                item.Draw(spriteBatch);
+                item.Draw(spriteBatch, gameTime);
             }
 
             spriteBatch.End();
 
             items.Clear();
             bgColor = null;
+        }
+
+        public void MoveTo(Point location)
+        {
+            position = location;
         }
     }
 }

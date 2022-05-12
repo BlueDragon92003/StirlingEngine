@@ -2,7 +2,7 @@
 
 namespace StirlingEngine.Framework.Colliders
 {
-    public class RectangleCollider : Collider
+    public class RectangleCollider : ICollider
     {
         //  Properties  -------------------------------------------------------------------------------------------------------
         private Rectangle collisionRectangle;
@@ -25,7 +25,7 @@ namespace StirlingEngine.Framework.Colliders
          *   Precons: A valid Collider to check collision.
          *  Postcons: Returns if the colliders collide.
          */
-        public bool CollidesWith(Collider collider)
+        public bool CollidesWith(ICollider collider)
         {
             switch(collider)
             {

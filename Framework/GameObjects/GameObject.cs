@@ -16,12 +16,12 @@ using StirlingEngine.Framework.Colliders;
 
 namespace StirlingEngine.Framework.GameObjects
 {
-   public  abstract class GameObject : Drawable
+   public  abstract class GameObject : Graphics.IDrawable
     {
         //  Properties  -------------------------------------------------------------------------------------------------------
-        private Collider collider;  //  Object's collider object
+        private ICollider collider;  //  Object's collider object
         protected Rectangle drawRectangle;
-        protected Point Position
+        public Point Position
         {
             get { return drawRectangle.Center; }
             set
@@ -33,7 +33,7 @@ namespace StirlingEngine.Framework.GameObjects
         }
 
         //  Constructors    ---------------------------------------------------------------------------------------------------
-        protected GameObject(Point position, Collider collider, Rectangle drawRectangle)
+        protected GameObject(Point position, ICollider collider, Rectangle drawRectangle)
         {
             this.collider = collider;
             this.drawRectangle = drawRectangle;
@@ -41,11 +41,14 @@ namespace StirlingEngine.Framework.GameObjects
         }
 
         //  Methods     -------------------------------------------------------------------------------------------------------
-        public abstract void Draw(SpriteBatch _spriteBatch);
+        public abstract void Draw(SpriteBatch _spriteBatch, GameTime gameTime);
+
+        public abstract void OnCollision(GameObject gameObject);
 
         public bool CollidesWith(GameObject gameObject)
         {
             return collider.CollidesWith(gameObject.collider);
         }
+
     }
 }

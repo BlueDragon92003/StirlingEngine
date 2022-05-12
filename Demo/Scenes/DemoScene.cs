@@ -26,8 +26,6 @@ namespace StirlingEngine.Demo.Scenes
 
         private Camera camera;
 
-        private BasicSquareItem playersquare;
-
         //  Methods    ---------------------------------------------------------------------------------------------------
         public void Load(GraphicsDevice graphics, IServiceProvider service)
         {
@@ -35,22 +33,11 @@ namespace StirlingEngine.Demo.Scenes
             Thread contentThread = new Thread(LoadContent);
             contentThread.Start();
             camera = new Camera(new Point(0, 0), graphics);
-            keyboardInputManager = KeyboardInputManager.Instance;
-            keyboardInputManager.registerKeyInput("left", Keys.A);
-            keyboardInputManager.registerKeyInput("left", Keys.Left);
-            keyboardInputManager.registerKeyInput("right", Keys.D);
-            keyboardInputManager.registerKeyInput("right", Keys.Right);
-            keyboardInputManager.registerKeyInput("up", Keys.W);
-            keyboardInputManager.registerKeyInput("up", Keys.Up);
-            keyboardInputManager.registerKeyInput("down", Keys.S);
-            keyboardInputManager.registerKeyInput("down", Keys.Down);
             if (oneLoaded) isLoaded = true; else oneLoaded = true;
         }
 
         private void LoadContent()
         {
-            Texture2D squareTexture = contentManager.Load<Texture2D>("square");
-            playersquare = new BasicSquareItem(new Point(0, 0), 60, squareTexture);
             if (oneLoaded) isLoaded = true; else oneLoaded = true;
         }
 
@@ -73,19 +60,13 @@ namespace StirlingEngine.Demo.Scenes
 
         public Scene Update(GameTime gameTime)
         {
-            if (keyboardInputManager.getInputState("left") == KeyState.Down)    playersquare.Move(new Point(-1,  0));
-            if (keyboardInputManager.getInputState("right") == KeyState.Down)   playersquare.Move(new Point( 1,  0));
-            if (keyboardInputManager.getInputState("up") == KeyState.Down)      playersquare.Move(new Point( 0, -1));
-            if (keyboardInputManager.getInputState("down") == KeyState.Down)    playersquare.Move(new Point( 0,  1));
-
             return this;
         }
 
         public void Draw(GameTime gameTime)
         {
-            camera.setBackgroundColor(Color.CornflowerBlue);
-            camera.AddItem(playersquare);
-            camera.Draw();
+            camera.setBackgroundColor(Color.Black);
+            camera.Draw(gameTime);
         }
     }
 }
