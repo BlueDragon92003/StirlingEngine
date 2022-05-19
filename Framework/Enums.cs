@@ -7,7 +7,7 @@ namespace StirlingEngine.Framework
     public enum Direction
     {
         Up,
-        Down,ch
+        Down,
         Left,
         Right
     }
