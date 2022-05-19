@@ -1,4 +1,4 @@
-﻿/*  Interface Drawable
+﻿/*  Interface IDrawable
  *  
  *  Represents an object that can be displayed to the screen.
  *  Requires a draw method, which takes a sprite batch.

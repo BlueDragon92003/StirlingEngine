@@ -71,7 +71,7 @@ namespace StirlingEngine.Framework.Graphics
             items.Add(item);
         }
 
-        public void setBackgroundColor(Color color)
+        public void SetBackgroundColor(Color color)
         {
             bgColor = color;
         }
@@ -85,8 +85,8 @@ namespace StirlingEngine.Framework.Graphics
         {
             Matrix transformMatrix = Matrix.CreateScale(1);
             transformMatrix *= Matrix.CreateTranslation(new Vector3(
-                    (position.X + graphicsDevice.Viewport.Width) / 2,
-                    (position.Y + graphicsDevice.Viewport.Height) / 2,
+                    graphicsDevice.Viewport.Width / 2 - position.X,
+                    graphicsDevice.Viewport.Height / 2 - position.Y,
                     0
                 ));
 
@@ -115,6 +115,16 @@ namespace StirlingEngine.Framework.Graphics
         public void MoveTo(Point location)
         {
             position = location;
+        }
+
+        public void MoveBy(Point direction)
+        {
+            position += direction;
+        }
+
+        public Point GetPosition()
+        {
+            return position;
         }
     }
 }

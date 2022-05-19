@@ -11,15 +11,14 @@
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using StirlingEngine.Framework.Graphics;
 using StirlingEngine.Framework.Colliders;
 
 namespace StirlingEngine.Framework.GameObjects
 {
-   public  abstract class GameObject : Graphics.IDrawable
+   public  abstract class GameObject : Graphics.IDrawable, ICollidable
     {
         //  Properties  -------------------------------------------------------------------------------------------------------
-        private ICollider collider;  //  Object's collider object
+        private readonly ICollider collider;  //  Object's collider object
         protected Rectangle drawRectangle;
         public Point Position
         {
@@ -43,12 +42,16 @@ namespace StirlingEngine.Framework.GameObjects
         //  Methods     -------------------------------------------------------------------------------------------------------
         public abstract void Draw(SpriteBatch _spriteBatch, GameTime gameTime);
 
-        public abstract void OnCollision(GameObject gameObject);
+        public abstract void OnCollision(ICollidable collidable);
 
-        public bool CollidesWith(GameObject gameObject)
+        public bool CollidesWith(ICollider collider)
         {
-            return collider.CollidesWith(gameObject.collider);
+            return this.collider.CollidesWith(collider);
         }
 
+        public void MoveTo(Point position)
+        {
+            Position = position;
+        }
     }
 }

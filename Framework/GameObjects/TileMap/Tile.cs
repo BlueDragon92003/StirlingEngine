@@ -8,10 +8,10 @@ namespace StirlingEngine.Framework.GameObjects.TileMap
     {
         private ITileType type;
 
-        public Tile(Point position, int size, ITileType type) : base (
+        public Tile(Point position, Point size, ITileType type) : base (
             position,
-            new RectangleCollider(position, new Point(size, size)),
-            new Rectangle(position - new Point(size / 2, size / 2), new Point(size,size))
+            new RectangleCollider(position, size),
+            new Rectangle(position - new Point(size.X / 2, size.Y / 2), size)
             )
         {
             this.type = type;
@@ -22,23 +22,14 @@ namespace StirlingEngine.Framework.GameObjects.TileMap
             _spriteBatch.Draw(type.GetTexture(gameTime), drawRectangle, Color.White);
         }
 
-        public void Collision(GameObject gameObject)
-        {
-            if (CollidesWith(gameObject))
-            {
-                gameObject.OnCollision(this);
-                OnCollision(gameObject);
-            }
-        }
-
         public void SetType(ITileType type)
         {
             this.type = type;
         }
 
-        public override void OnCollision(GameObject gameObject)
+        public override void OnCollision(ICollidable collidable)
         {
-            type.OnCollision(gameObject);
+            type.OnCollision(collidable);
         }
     }
 }

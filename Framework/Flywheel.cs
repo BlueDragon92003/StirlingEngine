@@ -35,7 +35,6 @@ namespace StirlingEngine.Framework
 
             if(scene.IsLoaded())
             {
-                KeyboardInputManager.Instance.Update();
                 scene = scene.Update(gameTime);
             }
 

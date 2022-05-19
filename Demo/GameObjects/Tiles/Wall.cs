@@ -6,16 +6,18 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace StirlingEngine.Demo.GameObjects.Tiles
 {
-    class Floor : ITileType
+    class Wall : ITileType
     {
         public static Texture2D texture;
 
-        public Floor(ContentManager contentManager)
+        public Wall(ContentManager contentManager)
         {
             Load(contentManager);
         }
 
-        public void OnCollision(ICollidable collidable) { }
+        public void OnCollision(ICollidable collidable) {
+
+        }
 
         public Texture2D GetTexture(GameTime gameTime)
         {
@@ -24,7 +26,7 @@ namespace StirlingEngine.Demo.GameObjects.Tiles
 
         public void Load(ContentManager contentManager)
         {
-            texture = contentManager.Load<Texture2D>("floor");
+            texture = contentManager.Load<Texture2D>("wall");
         }
     }
 }

@@ -14,6 +14,8 @@
  */
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using StirlingEngine.Framework.Colliders;
 using System;
 
 namespace StirlingEngine.Framework.GameObjects.TileMap
@@ -22,7 +24,7 @@ namespace StirlingEngine.Framework.GameObjects.TileMap
     {
         private readonly Tile[,] tiles;
 
-        public ProceduralTileMapChunk(Point chunkSize, Point tileSize, Func<int, int, Point, Tile> getTile)
+        public ProceduralTileMapChunk(Point location, Point chunkSize, Point tileSize, Func<int, int, Point, Tile> getTile)
         {
             this.tileSize = tileSize;
             tiles = new Tile[chunkSize.X, chunkSize.Y];
@@ -30,7 +32,7 @@ namespace StirlingEngine.Framework.GameObjects.TileMap
             {
                 for (int x = 0; x < chunkSize.X; x++)
                 {
-                    tiles[y, x] = getTile(x, y, tileSize);
+                    tiles[y, x] = getTile(location.X + x * tileSize.X, location.Y + y * tileSize.Y, tileSize);
                 }
             }
         }
@@ -43,6 +45,37 @@ namespace StirlingEngine.Framework.GameObjects.TileMap
         public override void SetItemAt(Point position, Tile item)
         {
             tiles[position.Y, position.X] = item;
+        }
+
+        public override bool CollidesWith(ICollider collider)
+        {
+            bool hitSomething = false;
+
+            foreach (Tile tile in tiles)
+            {
+                if (tile.CollidesWith(collider)) hitSomething = true;
+            }
+
+            return hitSomething;
+        }
+        
+        public override void OnCollision(ICollidable collidable)
+        {
+            foreach (Tile tile in tiles)
+            {
+                if (tile.CollidesWith(collidable))
+                {
+                    tile.OnCollision(collidable);
+                }
+            }
+        }
+
+        public override void Draw(SpriteBatch _spriteBatch, GameTime gameTime)
+        {
+            foreach (Tile tile in tiles)
+            {
+                tile.Draw(_spriteBatch, gameTime);
+            }
         }
     }
 }

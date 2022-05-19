@@ -24,24 +24,7 @@ namespace StirlingEngine.Framework.Input
         private Dictionary<string, KeyState> inputState;    //  Stores which inputs are pressed/released
         private Dictionary<string, ushort> inputDuration;   //  Stores how long the button has been pressed/released
 
-        //  Singleton Pattern (Thread Safe) -----------------------------------------------------------------------------------
-        private static readonly object padlock = new object();
-        private static KeyboardInputManager instance = null;
-        public static KeyboardInputManager Instance
-        {
-            get
-            {
-                lock (padlock)
-                {
-                    if (instance is null)
-                    {
-                        instance = new KeyboardInputManager();
-                    }
-                    return instance;
-                }
-            }
-        }
-        private KeyboardInputManager()
+        public KeyboardInputManager()
         {
             inputKeyMap = new Dictionary<Keys, string>();
             inputState = new Dictionary<string, KeyState>();
@@ -76,19 +59,14 @@ namespace StirlingEngine.Framework.Input
             }
         }
 
-        public void registerKeyInput(string input, Keys key)
+        public void RegisterKeyInput(string input, Keys key)
         {
             inputKeyMap.Add(key, input);
             if (!inputState.ContainsKey(input)) inputState.Add(input, KeyState.Up);
             if (!inputDuration.ContainsKey(input)) inputDuration.Add(input, 0);
         }
 
-        public void resetKeyMap()
-        {
-            inputKeyMap.Clear();
-        }
-
-        public KeyState getInputState(string input)
+        public KeyState GetInputState(string input)
         {
             return inputState[input];
         }

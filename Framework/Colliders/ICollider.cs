@@ -1,4 +1,4 @@
-﻿/*  Interface Collider
+﻿/*  Interface ICollider
  *  
  *  Represents a shape that can be collided with.
  *  Requires a CollidesWith method, that takes another

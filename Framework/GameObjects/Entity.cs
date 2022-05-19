@@ -23,11 +23,11 @@ namespace StirlingEngine.Framework.GameObjects
          *   Precons: Point or Vector2 direction
          *  Postcons: Object moved
          */
-        public void Move(Point direction)
+        public void MoveBy(Point direction)
         {
             Position += direction;
         }
-        public void Move(Vector2 direction)
+        public void MoveBy(Vector2 direction)
         {
             Position = new Point(
                 Position.X + (int)direction.X,
