@@ -19,6 +19,6 @@ namespace StirlingEngine.Framework.GameObjects.TileMap
 
         public void Load(ContentManager contentManager);
 
-        public void OnCollision(ICollidable collidable);
+        public void OnCollision(Tile tile, GameObject collidable);
     }
 }

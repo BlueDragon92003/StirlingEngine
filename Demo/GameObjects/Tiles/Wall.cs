@@ -1,4 +1,4 @@
-﻿using StirlingEngine.Framework.Colliders;
+﻿using StirlingEngine.Framework.GameObjects;
 using StirlingEngine.Framework.GameObjects.TileMap;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -15,8 +15,16 @@ namespace StirlingEngine.Demo.GameObjects.Tiles
             Load(contentManager);
         }
 
-        public void OnCollision(ICollidable collidable) {
+        public void OnCollision(Tile tile, GameObject collidable)
+        {
+            while(tile.CollidesWith(collidable.GetCollider()))
+            {
+                Vector2 directionVector = new Vector2(collidable.Position.X - tile.Position.X,
+                   collidable.Position.Y - tile.Position.Y);
+                directionVector = Vector2.Normalize(directionVector);
 
+                
+            }
         }
 
         public Texture2D GetTexture(GameTime gameTime)

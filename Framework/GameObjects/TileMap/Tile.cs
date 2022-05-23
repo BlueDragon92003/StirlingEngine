@@ -4,7 +4,7 @@ using StirlingEngine.Framework.Colliders;
 
 namespace StirlingEngine.Framework.GameObjects.TileMap
 {
-    class Tile : GameObject
+    public class Tile : GameObject
     {
         private ITileType type;
 
@@ -27,9 +27,9 @@ namespace StirlingEngine.Framework.GameObjects.TileMap
             this.type = type;
         }
 
-        public override void OnCollision(ICollidable collidable)
+        public override void OnCollision(GameObject collidable)
         {
-            type.OnCollision(collidable);
+            type.OnCollision(this, collidable);
         }
     }
 }

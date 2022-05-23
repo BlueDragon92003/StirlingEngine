@@ -45,5 +45,10 @@ namespace StirlingEngine.Framework.Colliders
         {
             return collisionRectangle.Intersects(rectCollider.collisionRectangle);
         }
+
+        public Point GetPosition()
+        {
+            return collisionRectangle.Center;
+        }
     }
 }

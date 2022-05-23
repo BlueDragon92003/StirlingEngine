@@ -1,4 +1,4 @@
-﻿using StirlingEngine.Framework.Colliders;
+﻿using StirlingEngine.Framework.GameObjects;
 using StirlingEngine.Framework.GameObjects.TileMap;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -15,7 +15,7 @@ namespace StirlingEngine.Demo.GameObjects.Tiles
             Load(contentManager);
         }
 
-        public void OnCollision(ICollidable collidable) { }
+        public void OnCollision(Tile tile, GameObject collidable) { }
 
         public Texture2D GetTexture(GameTime gameTime)
         {

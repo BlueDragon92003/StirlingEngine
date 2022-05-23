@@ -30,5 +30,7 @@ namespace StirlingEngine.Framework.Colliders
          *  Postcons: A moved collider.
          */
         public void MoveTo(Point center);
+
+        public Point GetPosition();
     }
 }

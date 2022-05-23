@@ -10,10 +10,12 @@ using StirlingEngine.Framework.Colliders;
 
 namespace StirlingEngine.Framework.GameObjects.TileMap
 {
-    abstract class TileMap<T> : ICollidable, Graphics.IDrawable
+    abstract class TileMap<T> : GameObject
     {
         protected Point position;    //  Top-Left
         protected Point tileSize;     //  Width & height of tiles
+
+        protected TileMap(Point position, TileMapCollider collider) : base(position, collider, new Rectangle(0, 0, 0, 0)) { }
 
         public Point GetLocationOf(GameObject gameObject)
         {
@@ -29,16 +31,5 @@ namespace StirlingEngine.Framework.GameObjects.TileMap
         public abstract T GetItemAt(Point position);
 
         public abstract void SetItemAt(Point position, T item);
-
-        public abstract bool CollidesWith(ICollider collider);
-
-        public abstract void OnCollision(ICollidable collidable);
-
-        public abstract void Draw(SpriteBatch _spriteBatch, GameTime gameTime);
-
-        public void MoveTo(Point position)
-        {
-            this.position = position;
-        }
     }
 }

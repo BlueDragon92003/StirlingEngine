@@ -15,7 +15,7 @@ using StirlingEngine.Framework.Colliders;
 
 namespace StirlingEngine.Framework.GameObjects
 {
-   public  abstract class GameObject : Graphics.IDrawable, ICollidable
+   public  abstract class GameObject : Graphics.IDrawable
     {
         //  Properties  -------------------------------------------------------------------------------------------------------
         private readonly ICollider collider;  //  Object's collider object
@@ -42,7 +42,12 @@ namespace StirlingEngine.Framework.GameObjects
         //  Methods     -------------------------------------------------------------------------------------------------------
         public abstract void Draw(SpriteBatch _spriteBatch, GameTime gameTime);
 
-        public abstract void OnCollision(ICollidable collidable);
+        public abstract void OnCollision(GameObject collidable);
+
+        public ICollider GetCollider()
+        {
+            return collider;
+        }
 
         public bool CollidesWith(ICollider collider)
         {

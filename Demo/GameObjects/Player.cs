@@ -63,7 +63,7 @@ namespace StirlingEngine.Demo.GameObjects
             _spriteBatch.Draw(spriteSheet, drawRectangle, sourceRect, Color.White);
         }
 
-        public override void OnCollision(ICollidable collidable)
+        public override void OnCollision(GameObject gameObject)
         {
             
         }
