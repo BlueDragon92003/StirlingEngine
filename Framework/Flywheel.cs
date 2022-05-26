@@ -1,16 +1,14 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using StirlingEngine.Framework;
-using StirlingEngine.Framework.Input;
 
 namespace StirlingEngine.Framework
 {
     public class Flywheel : Game
     {
         private GraphicsDeviceManager _graphics;
-        private Scene scene;
+        private IScene scene;
 
-        public Flywheel(Scene scene)
+        public Flywheel(IScene scene)
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";

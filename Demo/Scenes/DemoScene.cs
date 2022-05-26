@@ -11,15 +11,11 @@ using StirlingEngine.Demo.GameObjects.Tiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-
 using StirlingEngine.Demo.GameObjects;
-
-using System.Diagnostics;
 
 namespace StirlingEngine.Demo.Scenes
 {
-    sealed class DemoScene : Scene
+    sealed class DemoScene : IScene
     {
         //  Content Management
         private ContentManager contentManager;
@@ -51,6 +47,7 @@ namespace StirlingEngine.Demo.Scenes
             Point playerPosition = new Point(0);
 
             Point playerSize = new Point(40);
+
             player = new Player(playerPosition,
                 new RectangleCollider(playerPosition, playerSize),
                 new Rectangle(playerPosition, playerSize),
@@ -71,9 +68,11 @@ namespace StirlingEngine.Demo.Scenes
             smallWorld = new ProceduralTileMapChunk(new Point(-600), new Point(24), new Point(50), (x, y, size) =>
             {
                 return new Tile(new Point(x, y), size,
-                    noise.Evaluate(x / (double)size.X, y / (double)size.Y) < 0.1 ? tiles[0] : tiles[1]
+                    noise.Evaluate(x / (double)size.X, y / (double)size.Y) < -0.1 ? tiles[0] : tiles[1]
                     );
             });
+
+            smallWorld.SetItemAt(new Point(12), new Tile(new Point(0), new Point(50), tiles[0]));
 
             if (oneLoaded) isLoaded = true; else oneLoaded = true;
         }
@@ -95,11 +94,12 @@ namespace StirlingEngine.Demo.Scenes
             return isLoaded;
         }
 
-        public Scene Update(GameTime gameTime)
+        public IScene Update(GameTime gameTime)
         {
             keyboardInputManager.Update();
 
             player.Update(keyboardInputManager);
+            player.Collide(smallWorld);
 
             camera.MoveTo(player.Position);
 

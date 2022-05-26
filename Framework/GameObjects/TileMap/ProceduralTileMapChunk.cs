@@ -22,10 +22,8 @@ namespace StirlingEngine.Framework.GameObjects.TileMap
 {
     class ProceduralTileMapChunk : TileMap<Tile>
     {
-        private readonly Tile[,] tiles;
-
         public ProceduralTileMapChunk(Point location, Point chunkSize, Point tileSize, Func<int, int, Point, Tile> getTile)
-            : base (location * tileSize * chunkSize, new TileMapCollider())
+            : base (location * tileSize * chunkSize)
         {
             this.tileSize = tileSize;
             tiles = new Tile[chunkSize.X, chunkSize.Y];
@@ -34,9 +32,10 @@ namespace StirlingEngine.Framework.GameObjects.TileMap
                 for (int x = 0; x < chunkSize.X; x++)
                 {
                     tiles[y, x] = getTile(location.X + x * tileSize.X, location.Y + y * tileSize.Y, tileSize);
-                    
                 }
             }
+
+            SetCollider(new TileMapCollider(tileSize, tiles));
         }
 
         public override Tile GetItemAt(Point position)

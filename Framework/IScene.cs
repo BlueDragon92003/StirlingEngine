@@ -1,4 +1,4 @@
-﻿/*  abstract class Scene
+﻿/*  Interface Scene
  * 
  *  A screen is a section of a game,
  *  such as a Title Scene, Menu Scene,
@@ -16,7 +16,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace StirlingEngine.Framework
 {
-    public interface Scene
+    public interface IScene
     {
         /*      Name: Draw
          *   Purpose: Draws the content in the screen to the window
@@ -31,7 +31,7 @@ namespace StirlingEngine.Framework
          *  Postcons: Updated screen. Returns `this` to continue using the current screen, 
          *              or returns a new screen if the screen is changing
          */
-        public Scene Update(GameTime gameTime);
+        public IScene Update(GameTime gameTime);
 
         /*      Name: Load
          *   Purpose: Sets the scene up so it can be used. 

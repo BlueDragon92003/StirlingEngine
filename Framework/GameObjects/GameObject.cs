@@ -18,7 +18,7 @@ namespace StirlingEngine.Framework.GameObjects
    public  abstract class GameObject : Graphics.IDrawable
     {
         //  Properties  -------------------------------------------------------------------------------------------------------
-        private readonly ICollider collider;  //  Object's collider object
+        private ICollider collider;  //  Object's collider object
         protected Rectangle drawRectangle;
         public Point Position
         {
@@ -49,6 +49,11 @@ namespace StirlingEngine.Framework.GameObjects
             return collider;
         }
 
+        public void SetCollider(ICollider collider)
+        {
+            this.collider = collider;
+        }
+
         public bool CollidesWith(ICollider collider)
         {
             return this.collider.CollidesWith(collider);
@@ -57,6 +62,15 @@ namespace StirlingEngine.Framework.GameObjects
         public void MoveTo(Point position)
         {
             Position = position;
+        }
+
+        public void Collide(GameObject gameObject)
+        {
+            if (this.CollidesWith(gameObject.collider))
+            {
+                this.OnCollision(gameObject);
+                gameObject.OnCollision(this);
+            }
         }
     }
 }
